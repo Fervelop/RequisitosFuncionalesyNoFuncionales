@@ -8,22 +8,18 @@
 **Precondiciones:** Cliente tiene documento de identidad válido (para futuras reservas) y acceso a correo/teléfono.
 
 **Flujo Principal:**
-1. Cliente accede a página de registro (web o app).
+1. Cliente accede a página de registro.
 2. Sistema solicita: nombres completos, documento (opcional en registro inicial, obligatorio para reserva), correo, teléfono.
-3. Cliente proporciona información requerida.
-4. Sistema valida formato y unicidad de datos (correo/teléfono).
-5. Sistema envía código de verificación por SMS/email.
-6. Cliente confirma código.
-7. Sistema crea cuenta y redirige a perfil.
+3. Sistema valida formulario y unión de datos (correo/teléfono).
+4. Sistema envía código de verificación por SMS/email.
+5. Cliente confirma código.
+6. Sistema crea cuenta y redirige a perfil.
 
 **Criterios de Aceptación:**
 - Validación básica de datos con formato estándar.
-- Verificación dual: SMS + email.
-- Tiempo máximo de proceso: 5 minutos.
-- Integración futura con servicios de validación de identidad si se requiere (ej. identificación digital).
-
-**Prioridad:** MUST (Crítico)  
-**Fuente:** Entrevista Gerente de Operaciones (GO) - "Gestión de Clientes", Entrevista Gerente de Producto (GP) - "Proceso Ideal Cliente"
+- Verificación: SMS / email.
+- Tiempo máximo de proceso: 3 minutos.
+- Integración futura con servicios de validación de identidad si se requiere (ej. validación con Procuraduría).
 
 ### RF-001.2: Perfil de Preferencias y Personalización
 **Descripción:** El sistema debe recopilar información sobre las preferencias de viaje, presupuesto, restricciones y necesidades especiales del cliente para ofrecer planes altamente personalizados.  
@@ -48,9 +44,6 @@
 - Personalización inmediata del dashboard y recomendaciones.
 - Facilidad para agentes de añadir y actualizar información del cliente.
 
-**Prioridad:** MUST (Crítico)  
-**Fuente:** Entrevista GO - "Datos esenciales para perfiles detallados", Entrevista GP - "Información esencial para perfiles", Entrevista GT - "Base de Datos NoSQL/Relacional Híbrida"
-
 ## RF-002: CREACIÓN Y GESTIÓN DE ITINERARIOS Y SERVICIOS
 
 ### RF-002.1: Catálogo de Servicios de Viaje
@@ -69,9 +62,6 @@
 - Clasificación por tipo (Vuelos, Alojamiento, Tours, Transporte, Seguros, Experiencias), proveedor, ubicación y nivel de personalización.
 - Facilidad para un administrador de agregar nuevos proveedores y servicios al catálogo sin programación.
 - Búsqueda y filtrado eficiente para agentes.
-
-**Prioridad:** MUST (Crítico)  
-**Fuente:** Entrevista GO - "Tipos de servicios", "Adaptar el sistema", Entrevista GT - "Esquema Flexible", "Extensibilidad y Patrones de Diseño"
 
 ### RF-002.2: Construcción de Itinerarios Personalizados
 **Descripción:** El sistema debe permitir a los agentes construir itinerarios día por día de forma intuitiva, combinando servicios y ajustando según las necesidades del cliente.  
@@ -95,9 +85,6 @@
 - Flexibilidad para añadir servicios no estándar.
 - Cálculo de coste total y desglose.
 
-**Prioridad:** MUST (Crítico)  
-**Fuente:** Entrevista GO - "Pasos fundamentales", Entrevista GP - "Interfaz intuitiva para agentes", Entrevista GT - "Motor de Reglas de Negocio", "API Gateway"
-
 ### RF-002.3: Gestión de Disponibilidad y Tarifas de Proveedores
 **Descripción:** El sistema debe integrarse con proveedores externos para obtener disponibilidad y tarifas en tiempo real y comparar opciones automáticamente.  
 **Actor:** Sistema automático, Agente de Viajes  
@@ -113,10 +100,6 @@
 - Sincronización de disponibilidad en tiempo real.
 - Motor de comparación con criterios configurables (precio, valoración, etc.).
 - Integración mediante APIs (GDS, motores hoteleros, aerolíneas, operadores de tours).
-- Latencia de búsqueda de proveedores: ≤ 5 segundos.
-
-**Prioridad:** MUST (Crítico)  
-**Fuente:** Entrevista GO - "Disponibilidad y tarifas", Entrevista GT - "Integración con GDS y APIs de Terceros", "Motor de Reglas de Negocio", "Caché Distribuida"
 
 # REQUISITOS NO FUNCIONALES - PLATAFORMA DE VIAJES PERSONALIZADOS
 
