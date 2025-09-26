@@ -8,18 +8,22 @@
 **Precondiciones:** Cliente tiene documento de identidad válido (para futuras reservas) y acceso a correo/teléfono.
 
 **Flujo Principal:**
-1. Cliente accede a página de registro.
+1. Cliente accede a página de registro (web o app).
 2. Sistema solicita: nombres completos, documento (opcional en registro inicial, obligatorio para reserva), correo, teléfono.
-3. Sistema valida formulario y unión de datos (correo/teléfono).
-4. Sistema envía código de verificación por SMS/email.
-5. Cliente confirma código.
-6. Sistema crea cuenta y redirige a perfil.
+3. Cliente proporciona información requerida.
+4. Sistema valida formato y unicidad de datos (correo/teléfono).
+5. Sistema envía código de verificación por SMS/email.
+6. Cliente confirma código.
+7. Sistema crea cuenta y redirige a perfil.
 
 **Criterios de Aceptación:**
 - Validación básica de datos con formato estándar.
-- Verificación: SMS / email.
-- Tiempo máximo de proceso: 3 minutos.
-- Integración futura con servicios de validación de identidad si se requiere (ej. validación con Procuraduría).
+- Verificación dual: SMS + email.
+- Tiempo máximo de proceso: 5 minutos.
+- Integración futura con servicios de validación de identidad si se requiere (ej. identificación digital).
+
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista Gerente de Operaciones (GO) - "Gestión de Clientes", Entrevista Gerente de Producto (GP) - "Proceso Ideal Cliente"
 
 ### RF-001.2: Perfil de Preferencias y Personalización
 **Descripción:** El sistema debe recopilar información sobre las preferencias de viaje, presupuesto, restricciones y necesidades especiales del cliente para ofrecer planes altamente personalizados.  
@@ -44,6 +48,9 @@
 - Personalización inmediata del dashboard y recomendaciones.
 - Facilidad para agentes de añadir y actualizar información del cliente.
 
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Datos esenciales para perfiles detallados", Entrevista GP - "Información esencial para perfiles", Entrevista GT - "Base de Datos NoSQL/Relacional Híbrida"
+
 ## RF-002: CREACIÓN Y GESTIÓN DE ITINERARIOS Y SERVICIOS
 
 ### RF-002.1: Catálogo de Servicios de Viaje
@@ -62,6 +69,9 @@
 - Clasificación por tipo (Vuelos, Alojamiento, Tours, Transporte, Seguros, Experiencias), proveedor, ubicación y nivel de personalización.
 - Facilidad para un administrador de agregar nuevos proveedores y servicios al catálogo sin programación.
 - Búsqueda y filtrado eficiente para agentes.
+
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Tipos de servicios", "Adaptar el sistema", Entrevista GT - "Esquema Flexible", "Extensibilidad y Patrones de Diseño"
 
 ### RF-002.2: Construcción de Itinerarios Personalizados
 **Descripción:** El sistema debe permitir a los agentes construir itinerarios día por día de forma intuitiva, combinando servicios y ajustando según las necesidades del cliente.  
@@ -85,6 +95,9 @@
 - Flexibilidad para añadir servicios no estándar.
 - Cálculo de coste total y desglose.
 
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Pasos fundamentales", Entrevista GP - "Interfaz intuitiva para agentes", Entrevista GT - "Motor de Reglas de Negocio", "API Gateway"
+
 ### RF-002.3: Gestión de Disponibilidad y Tarifas de Proveedores
 **Descripción:** El sistema debe integrarse con proveedores externos para obtener disponibilidad y tarifas en tiempo real y comparar opciones automáticamente.  
 **Actor:** Sistema automático, Agente de Viajes  
@@ -100,4 +113,63 @@
 - Sincronización de disponibilidad en tiempo real.
 - Motor de comparación con criterios configurables (precio, valoración, etc.).
 - Integración mediante APIs (GDS, motores hoteleros, aerolíneas, operadores de tours).
+- Latencia de búsqueda de proveedores: ≤ 5 segundos.
+
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Disponibilidad y tarifas", Entrevista GT - "Integración con GDS y APIs de Terceros", "Motor de Reglas de Negocio", "Caché Distribuida"
+
+## RF-003: COTIZACIONES Y RESERVAS
+
+### RF-003.1: Generación y Envío de Cotizaciones Detalladas
+**Descripción:** El sistema debe generar cotizaciones claras, visualmente atractivas y detalladas para el cliente, con opciones de revisión y aprobación.  
+**Actor:** Agente de Viajes, Cliente  
+**Precondiciones:** Itinerario creado por el agente.
+
+**Flujo Principal:**
+1. Agente finaliza un itinerario y solicita una cotización.
+2. Sistema genera una cotización con:
+   - Desglose de servicios y precios (por persona y total).
+   - Condiciones de cancelación.
+   - Fotos y descripciones breves de cada servicio.
+   - Opciones adicionales (upgrades, fechas alternativas, servicios extra).
+3. Agente envía la cotización al cliente (vía email, portal).
+4. Cliente recibe notificación y accede a la cotización en su portal de autoservicio.
+5. Cliente puede revisar, hacer comentarios, solicitar cambios, o aceptar/rechazar.
+
+**Criterios de Aceptación:**
+- Cotización clara, visualmente atractiva, descargable en PDF.
+- Desglose de costes transparente.
+- Portal del cliente con opción de comentarios y aprobación.
+- Notificaciones automáticas al cliente sobre nuevas cotizaciones.
+
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Cotización detallada", Entrevista GP - "Portal del Cliente"
+
+### RF-003.2: Flujo de Reserva y Pago
+**Descripción:** El sistema debe procesar la reserva de servicios con proveedores y gestionar pagos de clientes de forma segura y eficiente, incluyendo múltiples divisas y métodos de pago.  
+**Actor:** Cliente, Agente de Viajes, Sistema automático  
+**Precondiciones:** Cotización aceptada por el cliente y fondos disponibles.
+
+**Flujo Principal:**
+1. Cliente aprueba la cotización en su portal.
+2. Sistema presenta opciones de pago (PSE, tarjetas, Nequi, Daviplata, transferencia).
+3. Cliente selecciona método de pago y procede.
+4. Sistema (vía pasarela segura) procesa el pago.
+5. Si el pago es exitoso, el sistema confirma la reserva con los proveedores correspondientes vía API.
+6. Registra la transacción en el sistema de backoffice.
+7. Envía confirmación automática al cliente (correo y/o notificación en portal).
+8. Genera documentos necesarios (confirmación de reserva, vouchers, recibo de pago).
+9. Si el pago falla el sistema notifica al cliente con mensaje claro y opciones para reintentar o cambiar método.
+10. Reserva queda en estado pendiente durante un tiempo configurable (ej. 1 hora) antes de expiración automática.
+
+**Criterios de Aceptación:**
+- Integración con pasarela(s) de pago seguras y certificadas.
+- Soporte para pagos en COP y otras divisas según destino.
+- Manejo seguro de datos financieros (cumplimiento PCI-DSS).
+- Confirmación automática al cliente y reflejo en dashboard del agente.
+- Manejo de errores claro y fluido (reintento, expiración, contacto con soporte).
+- Registro completo de transacciones con trazabilidad.
+
+**Prioridad:** MUST (Crítico)  
+**Fuente:** Entrevista GO - "Reserva y pago", Entrevista GT - "Integración con pasarelas", Entrevista CTO - "Confirmación automática tras pago exitoso"
 
