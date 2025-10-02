@@ -68,23 +68,22 @@ Para identificar requisitos de manera eficiente, se utilizó un sistema de codif
 
 ### 🔴 Restricciones y Limitaciones
 
-- Plazo y Metodología: Plazo inicial de 6 meses para la versión funcional (MVP). Preferencia por desarrollo ágil en sprints.
-- Infraestructura: Preferencia por solución en la nube (AWS, Azure, GCP).
-- Legales/Regulatorias: Cumplimiento con GDPR, Ley de Protección de Datos local y regulaciones de países destino.
-- Usabilidad: Interfaz drag-and-drop para agentes y panel de cliente visual y amigable.
-
----
+* Plazo y Metodología: Plazo inicial de 7 trimestres para la versión funcional (MVP). Preferencia por desarrollo ágil en sprints.
+* Infraestructura: Preferencia por solución en la nube (AWS, Azure, GCP).
+* Legales/Regulatorias: Cumplimiento con GDPR, Ley de Protección de Datos local y regulaciones de países destino.
+* Usabilidad: Interfaz drag-and-drop para agentes y panel de cliente visual y amigable.
+* Lenguaje de Programación: Se recomienda utilizar tecnologías modernas como JavaScript (React para frontend, Node.js para backend) o Python (Django/Flask) para asegurar escalabilidad y facilidad de mantenimiento.
 
 ### 🟡 Roles y Permisos (RBAC)
 
-| Rol               | Acceso Principal                                               |
-|-------------------|---------------------------------------------------------------|
-| Administradores   | Acceso completo, configuración del sistema y gestión de usuarios. |
-| Gerencia          | Solo lectura de reportes, métricas, datos financieros y supervisión de agentes. |
-| Agentes de Ventas | Crear/editar itinerarios, ver/gestionar clientes asignados, cotizar y reservar. |
-| Soporte al Cliente| Acceso a itinerarios y datos de contacto durante el viaje, gestión de incidencias. |
-| Clientes          | Acceso solo a su perfil, itinerarios y cotizaciones.          |
-| Contabilidad      | Acceso a información financiera y de pagos.                   |
+| Rol                | Acceso Principal                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| Administradores    | Acceso completo, configuración del sistema y gestión de usuarios.                 |
+| Gerencia           | Solo lectura de reportes, métricas, datos financieros y supervisión de agentes.   |
+| Agentes de Ventas  | Crear/editar itinerarios, ver/gestionar clientes asignados, cotizar y reservar.     |
+| Soporte al Cliente | Acceso a itinerarios y datos de contacto durante el viaje, gestión de incidencias. |
+| Clientes           | Acceso solo a su perfil, itinerarios y cotizaciones.                                |
+| Contabilidad       | Acceso a información financiera y de pagos.                                        |
 
 ---
 
@@ -101,7 +100,7 @@ Para identificar requisitos de manera eficiente, se utilizó un sistema de codif
 
 - Uso de Base de Datos NoSQL/Relacional Híbrida para manejar información estructurada y flexible.
 - Necesidad de Esquema Flexible para añadir nuevos campos de personalización.
-- Uso de Caché Distribuida (Redis o Memcached) para mejorar rendimiento en búsquedas.
+- Uso de Caché Distribuida (Redis ) para mejorar rendimiento en búsquedas.
 
 **Integraciones Críticas:**
 
@@ -134,4 +133,3 @@ Para identificar requisitos de manera eficiente, se utilizó un sistema de codif
 - **PCI DSS:** Cumplimiento PCI DSS si se manejan tarjetas de crédito.
 - **Auditoría:** Monitoreo y Pruebas de Penetración periódicas.
 - **Almacenamiento:** Almacenamiento de Datos Geográfico para cumplir con regulaciones de residencia de datos.
-
